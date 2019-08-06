@@ -5,23 +5,32 @@ import Weather from './components/Weather.js';
 
 const api_key = "5782c3e70a6ecaf55d21dcede5364622";
 const city = "San Jose"
-const url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5782c3e70a6ecaf55d21dcede5364622"
+//const url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=5782c3e70a6ecaf55d21dcede5364622"
+const url = "https://api.openweathermap.org/data/2.5/weather?q=Sunnyvale,%20us&appid=5782c3e70a6ecaf55d21dcede5364622&units=imperial"
 
 class App extends React.Component{
-  getWeather = async(city) => {
-    const api_call = await fetch();
+  //This method will be responsible for ensuring that weather api data is fetched.
+  getWeather = async(e) => {
+    e.preventDefault(); //Preventing default behavior which means page will refresh and log data
+    //const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Sunnyvale, us&appid=${api_key}&units=imperial`);
+    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=San Jose, us&appid=5782c3e70a6ecaf55d21dcede5364622&units=imperial`)
+    const data = await api_call.json();
+    console.log("I sense something is happening");
+    console.log(data);
   }
   constructor(props){
     super(props);
+    //This state will contain information pertinent towards the app
     this.state = {
       weather: "I can see the weather state"
     }
   }
+  //Rendering the main app information: 
   render(){
     return(
       <div>
         <Titles />
-        <Form />
+        <Form weather_call = {this.getWeather}/>
         <Weather />
         {this.state.weather}
       </div>
