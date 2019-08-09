@@ -30,15 +30,17 @@ class App extends React.Component{
     //const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Sunnyvale, us&appid=${api_key}&units=imperial`);
     const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=5782c3e70a6ecaf55d21dcede5364622&units=imperial`)
     const data = await api_call.json();
-    console.log(data);
-    this.setState({
-      temperature: data.main.temp,
-      city: data.name,
-      country: data.sys.country,
-      humidity: data.main.humidity,
-      description: data.weather[0].description,
-      error: ""
-    });
+    if(city && country){
+      console.log(data);
+      this.setState({
+        temperature: data.main.temp,
+        city: data.name,
+        country: data.sys.country,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
+        error: ""
+      });
+      }
   }
   //Rendering the main app information: 
   render(){
