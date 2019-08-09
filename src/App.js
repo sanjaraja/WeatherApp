@@ -13,7 +13,12 @@ class App extends React.Component{
     super(props);
     //This state will contain information pertinent towards the app
     this.state = {
-      temperature: "I can see the weather state"
+      temperature: "",
+      city: "",
+      country: "",
+      humidity: "",
+      description: "",
+      error: ""
     }
   }
 
@@ -27,7 +32,12 @@ class App extends React.Component{
     const data = await api_call.json();
     console.log(data);
     this.setState({
-      temperature: data.main.temp
+      temperature: data.main.temp,
+      city: data.name,
+      country: data.sys.country,
+      humidity: data.main.humidity,
+      description: data.weather[0].description,
+      error: ""
     });
   }
   //Rendering the main app information: 
@@ -36,8 +46,14 @@ class App extends React.Component{
       <div>
         <Titles />
         <Form weather_call = {this.getWeather}/>
-        <Weather />
-        {this.state.weather}
+        <Weather 
+          temperature = {this.state.temperature}
+          city = {this.state.city}
+          country = {this.state.country}
+          humidity = {this.state.humidity}
+          description = {this.state.description}
+          error = {this.state.error}
+        />
       </div>
     );
   }
