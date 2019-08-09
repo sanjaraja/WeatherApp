@@ -13,12 +13,12 @@ class App extends React.Component{
     super(props);
     //This state will contain information pertinent towards the app
     this.state = {
-      temperature: "",
-      city: "",
-      country: "",
-      humidity: "",
-      description: "",
-      error: ""
+      temperature: undefined,
+      city: undefined,
+      country: undefined,
+      humidity: undefined,
+      description: undefined,
+      error: undefined
     }
     this.getWeather = this.getWeather.bind(this); 
   }
@@ -31,16 +31,25 @@ class App extends React.Component{
     const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=5782c3e70a6ecaf55d21dcede5364622&units=imperial`)
     const data = await api_call.json();
     if(city && country){
-      console.log(data);
+        console.log(data);
+        this.setState({
+          temperature: data.main.temp,
+          city: data.name,
+          country: data.sys.country,
+          humidity: data.main.humidity,
+          description: data.weather[0].description,
+          error: ""
+        });
+    }else{
       this.setState({
-        temperature: data.main.temp,
-        city: data.name,
-        country: data.sys.country,
-        humidity: data.main.humidity,
-        description: data.weather[0].description,
-        error: ""
+        temperature: undefined,
+        city: undefined,
+        country: undefined,
+        humidity: undefined,
+        description: undefined,
+        error: "Please enter the values for country and city"
       });
-      }
+    }
   }
   //Rendering the main app information: 
   render(){
