@@ -20,8 +20,8 @@ class App extends React.Component{
       description: "",
       error: ""
     }
+    this.getWeather = this.getWeather.bind(this); 
   }
-
   //This method will be responsible for ensuring that weather api data is fetched.
   getWeather = async(e) => {
     e.preventDefault(); //Preventing default behavior which means page will refresh and log data
