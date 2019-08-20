@@ -12,3 +12,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
+
+## Image of the site: 
+![ProjectImage](https://user-images.githubusercontent.com/46360985/63383405-91f48800-c351-11e9-8bac-7c59415a1589.PNG)
+
+
